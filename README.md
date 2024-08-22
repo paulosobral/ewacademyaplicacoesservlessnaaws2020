@@ -1,0 +1,1 @@
+# ewacademyaplicacoesservlessnaaws2020
