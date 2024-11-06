@@ -1,0 +1,29 @@
+console: true
+org: psobral89
+app: hello-sls-framework-v2
+service: hello-sls-framework-v2
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  hello:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  hello2:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /hello2
+          method: get
+  hello3:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /hello3
+          method: get
