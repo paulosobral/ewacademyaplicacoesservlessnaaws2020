@@ -16,7 +16,7 @@ provider:
         Resource: "*"
       - Effect: Allow
         Action:
-          - rekognition:TranslateText
+          - translate:TranslateText
         Resource: "*"
 
 functions:
