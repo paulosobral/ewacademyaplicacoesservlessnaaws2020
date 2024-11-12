@@ -11,4 +11,3 @@ module.exports.handler = async (event) => {
     ),
   };
 };
-// TODO: 06:27 https://play.ewacademy.com.br/area/produto/item/2981042
