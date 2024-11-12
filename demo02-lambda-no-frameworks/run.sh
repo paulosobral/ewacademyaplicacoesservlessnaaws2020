@@ -65,5 +65,3 @@ aws lambda invoke \
     --cli-binary-format raw-in-base64-out \
     --payload '{"name":"erickwendel"}' \
     --output text | base64 -d
-
-# TODO: 12:13 https://play.ewacademy.com.br/area/produto/item/2981036

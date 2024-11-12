@@ -3,6 +3,7 @@ const {
     test,
     expect
 } = require('@jest/globals')
+jest.setTimeout(1e4) // 10 secs
 
 const aws = require('aws-sdk')
 aws.config.update({
@@ -38,7 +39,10 @@ describe('Image analyser test suite', () => {
             statusCode: 400,
             body: "an IMG is required!"
         }
-        const result = await main({ queryStringParameters: {} })
+        const result = await main({ 
+            queryStringParameters: {} 
+        })
+
         expect(result).toStrictEqual(expected)
     })
     test('given an invalid ImageURL it should return 500', async () => {
@@ -51,6 +55,7 @@ describe('Image analyser test suite', () => {
                 imageUrl: "test"
             } 
         })
+        
         expect(result).toStrictEqual(expected)
     })
 })
