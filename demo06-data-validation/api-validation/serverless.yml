@@ -1,0 +1,17 @@
+service: api-validation
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+
+functions:
+  hero-insert:
+    handler: src/index.heroesInsert
+    events:
+      - http:
+          path: heroes
+          method: post
+          cors: true

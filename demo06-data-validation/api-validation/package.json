@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@hapi/joi": "17.1",
+    "aws-sdk": "^2.1692.0"
+  }
+}
