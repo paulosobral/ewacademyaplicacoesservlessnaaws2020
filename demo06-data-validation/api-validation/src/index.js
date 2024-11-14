@@ -1,38 +1,19 @@
 'use strict'
-const { randomUUID } = require('node:crypto')
-const { dynamodb } = require('./factory')
-const heroesInsert = async (event) => {
-  const data = event.body
-  const params = {
-    TableName: 'Heroes',
-    Item: {
-      ...data,
-      id: randomUUID,
-      createdAt: new Date().toISOString()
-    }
-  }
-  await dynamodb.put(params).promise()
+const { dynamoDB } = require('./factory')
+const Handler = require('./handler')
+const { decoratorValidator } = require('./util')
+const handler = new Handler({
+  dynamoDBSvc: dynamoDB
+})
 
-  const insertedItem = dynamodb.query({
-    TableName: 'Heroes',
-    ExpressionAttributeValues: {
-      ':id': params.Item.id
-    },
-    KeyConditionExpression: 'id = :id'
-  }).promise()
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      insertedItem,
-      null,
-      2
-    ),
-  };
-};
+const heroesInsert = decoratorValidator(
+  handler.main.bind(handler), // o .bind garante que a variavel this seja o conteudo do handler
+  Handler.validator(),
+  'body'
+)
 
 const heroesTrigger = async (event) => {
-  console.log('***event', event);
+  console.log('***event', JSON.stringify(event));
 
   return {
     statusCode: 200,
