@@ -1,0 +1,15 @@
+service: multienv
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+  stage: qa
+  environment:
+    ${file(./config/env.${self:provider.stage})}
+
+functions:
+  function1:
+    handler: index.hello
