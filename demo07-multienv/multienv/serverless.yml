@@ -8,8 +8,8 @@ provider:
   region: us-east-1
   stage: qa
   environment:
-    ${file(./config/env.${self:provider.stage})}
+    ${file(./config/env.${self:provider.stage}.json)}
 
 functions:
-  function1:
-    handler: index.hello
+  hello:
+    handler: handler.hello

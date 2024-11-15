@@ -1,9 +1,9 @@
 module.exports = {
     hello: function (event) {
-        console.log('env', proccess.env)
+        console.log('env', process.env)
         return {
             statusCode: 200
         }
     }
 }
-// TODO: 11:12 https://play.ewacademy.com.br/area/produto/item/2981338
+// TODO: 11:40 https://play.ewacademy.com.br/area/produto/item/2981338
