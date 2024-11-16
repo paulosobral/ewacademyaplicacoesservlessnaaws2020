@@ -1,45 +1,33 @@
+const settings = require("./../config/settings")
+const axios = require("axios")
+const cheerio = require("cheerio")
+const { dynamoDB } = require("./factory")
 const { randomUUID } = require('node:crypto')
 
 class Handler {
-    constructor({ 
-        dynamoDBSvc 
-    }) {
-        this.dynamoDBSvc = dynamoDBSvc
-        this.dynamoTable = 'Heroes'
+  static async main(event) {
+    console.log('at', new Date().toISOString(), JSON.stringify(event, null, 2))
+    const  { data } = await axios.get(settings.commitMessagesUrl)
+    const $ = cheerio.load(data)
+    const [commitMessage] = await $('#content').text().trim().split('\n')
+    console.log('Message', commitMessage )
+    const params = {
+      TableName: settings.dbTableName,
+      Item: {
+        commitMessage,
+        id: randomUUID(),
+        createdAt: new Date().toISOString()
+      }
     }
+    await dynamoDB.put(params).promise()
+    console.log('process finished at', new Date().toISOString())
 
-    async main(event) {
-        const data = event.body
-
-        const params = this.prepareData(data)
-        await this.dynamoDBSvc.put(params).promise()
-
-        const insertedItem = await this.dynamoDBSvc.query({
-            TableName: this.dynamoTable,
-            ExpressionAttributeValues: {
-            ':id': params.Item.id
-            },
-            KeyConditionExpression: 'id = :id'
-        }).promise()
-
-        return {
-            statusCode: 200,
-            body: JSON.stringify(
-            insertedItem
-            ),
-        };
+    return {
+      statusCode: 200
     }
-
-    prepareData(data) {
-        return {
-            TableName: 'Heroes',
-            Item: {
-                ...data,
-                id: randomUUID(),
-                createdAt: new Date().toISOString()
-            }
-        }
-    }
+  }
 }
 
-module.exports = Handler
+module.exports = {
+  scheduler: Handler.main
+}
