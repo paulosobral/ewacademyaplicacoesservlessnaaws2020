@@ -11,4 +11,3 @@ aws dynamodb create-table \
 
 aws dynamodb list-tables \
   --endpoint-url http://localhost:4566
-# TODO 40:00 https://play.ewacademy.com.br/area/produto/item/2981319

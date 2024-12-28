@@ -7,7 +7,7 @@ const { randomUUID } = require('node:crypto')
 class Handler {
   static async main(event) {
     console.log('at', new Date().toISOString(), JSON.stringify(event, null, 2))
-    const  { data } = await axios.get(settings.commitMessagesUrl)
+    const { data } = await axios.get(settings.commitMessagesUrl)
     const $ = cheerio.load(data)
     const [commitMessage] = await $('#content').text().trim().split('\n')
     console.log('Message', commitMessage )

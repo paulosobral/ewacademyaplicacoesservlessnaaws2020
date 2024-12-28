@@ -15,6 +15,11 @@ aws dynamodb list-tables \
   --no-cli-pager \
   --endpoint-url http://localhost:4566
 
+aws \
+--no-cli-pager \
+--endpoint-url=http://localhost:4566 dynamodb scan \
+--table-name CommitMessages-qa
+
 # aws \
 #   --no-cli-pager \
 # --endpoint-url=http://localhost:4566 dynamodb scan \
