@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "invoke-local": "IS_OFFLINE=true sls invoke local -f mememaker --path mocks/request.json",
+    "offline": "IS_OFFLINE=true sls offline"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@erickwendel/meme-maker": "^3.0.0"
+    "@erickwendel/meme-maker": "^3.0.0",
+    "axios": "^1.7.9"
   },
   "devDependencies": {
     "serverless-offline": "^12.0.4"

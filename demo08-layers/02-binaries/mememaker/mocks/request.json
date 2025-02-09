@@ -1,6 +1,7 @@
 {
-    "queryStringParametes": {
-        "image": "",
-        "topText": ""
+    "queryStringParameters": {
+        "image": "https://wallpapers.com/images/hd/cartoon-character-homer-simpson-f0ggak0j97oog2t3.jpg",
+        "topText": "HOJE É DIA DE",
+        "bottomText": "DEPLOY"
     }
 }
