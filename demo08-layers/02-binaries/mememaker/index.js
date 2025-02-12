@@ -49,4 +49,3 @@ module.exports.mememaker = async (event) => {
 
   return response
 };
-// TODO: 19:58 https://play.ewacademy.com.br/area/produto/item/2981394
