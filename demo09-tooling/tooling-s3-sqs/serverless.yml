@@ -1,0 +1,21 @@
+service: tooling-s3-sqs
+
+
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+plugins:
+  - serverless-offline
+  - serverless-mocha-plugin
+
+
+
+functions:
+  hello:
+    handler: index.handler
+    events:
+      - http:
+          method: get
+          path: hello
