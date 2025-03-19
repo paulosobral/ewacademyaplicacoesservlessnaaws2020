@@ -1,13 +1,27 @@
+'use strict'
+const AWS = require('aws-sdk')
+
+const host = process.env.LOCALSTACK_HOST || 'localhost'
+const s3port = process.env.S3_PORT || '4572'
+const s3config = {
+  s3ForcePathStyle: true,
+  endpoint: new AWS.Endpoint(
+    `http://${host}:${s3port}`
+  )
+}
+const s3 = new AWS.S3(s3config)
+
 module.exports.handler = async (event) => {
+  const allBuckets = await s3.listBuckets().promise()
+  console.log('found', allBuckets)
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'Hello!',
+        allBuckets,
       },
       null,
       2
     ),
   };
 };
-// TODO: 11:09 https://play.ewacademy.com.br/area/produto/item/2979171

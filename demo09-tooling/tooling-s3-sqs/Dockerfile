@@ -4,7 +4,8 @@ WORKDIR /src/
 
 COPY package.json package-lock.json /src/
 
-RUN npm ci --silent
+# RUN npm ci --silent
+RUN npm install
 
 COPY . .
 
